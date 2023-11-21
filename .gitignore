@@ -403,3 +403,12 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+bin
+obj
+packages
+XamarinTechnicalChallenge/.vs/XamarinTechnicalChallenge/xs/project-cache/XamarinTechnicalChallenge.iOS-Debug_iPhone.json 
+XamarinTechnicalChallenge/.vs/XamarinTechnicalChallenge/xs/project-cache/XamarinTechnicalChallenge.iOS-Debug_iPhoneSimulator.json
+
+XamarinTechnicalChallenge/.vs/
+
