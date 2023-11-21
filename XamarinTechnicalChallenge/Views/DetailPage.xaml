@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:converters="clr-namespace:XamarinTechnicalChallenge"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             x:Class="XamarinTechnicalChallenge.Views.DetailPage"
+             iOS:Page.UseSafeArea="True"
+             Shell.TabBarIsVisible="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:EmbeddedImageConverter x:Key="EmbeddedImageConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <CarouselView x:Name="ListPosts"
+                              Margin="0,0,0,0"
+                              ItemsSource="{Binding Pictures}"
+                              Loop="False"
+                              BackgroundColor="Black"
+                              AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                              AbsoluteLayout.LayoutFlags="All"
+                              IsBounceEnabled="False"
+                              RemainingItemsThreshold="1"
+                              RemainingItemsThresholdReachedCommand="{Binding RemainingItemsThresholdReachedCommand}" >
+                    <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <AbsoluteLayout >
+                            <ffimageloading:CachedImage BackgroundColor="Transparent" Source="{Binding GalleryImage, Converter={StaticResource EmbeddedImageConverter}}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                                                        DownsampleToViewSize="True" Aspect="Fill"/>
+                            <StackLayout VerticalOptions="End" HorizontalOptions="Center" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                                <AbsoluteLayout HorizontalOptions="Center" >
+                                    <Frame HasShadow="False" BackgroundColor="White" IsVisible="true" Padding="0" VerticalOptions="End" HorizontalOptions="Center" HeightRequest="50" WidthRequest="50">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Path=BindingContext.SetStatusCommand, Source={x:Reference Name=ListPosts}}" CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                    <Frame HasShadow="False" BackgroundColor="Red" IsVisible="{Binding Favorite}" Padding="0" VerticalOptions="End" HorizontalOptions="Center" HeightRequest="50" WidthRequest="50">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Path=BindingContext.RemoveStatusCommand, Source={x:Reference Name=ListPosts}}" CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </AbsoluteLayout>
+                                <Label Text="Favorite" FontSize="16" HorizontalOptions="Center" TextColor="White"/>
+                            </StackLayout>
+                        </AbsoluteLayout>
+                    </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

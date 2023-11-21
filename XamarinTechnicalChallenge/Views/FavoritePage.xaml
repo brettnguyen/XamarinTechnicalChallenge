@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             x:Class="XamarinTechnicalChallenge.Views.FavoritePage"
+             iOS:Page.UseSafeArea="True">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <CollectionView x:Name="ListImages"
+                           ItemsSource="{Binding Pictures}"     
+                           HorizontalOptions="Fill"     
+                           ItemsLayout="VerticalGrid, 3"
+                           SelectionMode="Single"
+                           ItemSizingStrategy="MeasureAllItems"
+                           RemainingItemsThreshold = "9"
+                           AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                           RemainingItemsThresholdReachedCommand="{Binding RemainingItemsThresholdReachedCommand}"
+                           ItemsUpdatingScrollMode="KeepItemsInView">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView>
+                            <AbsoluteLayout>
+                                <ffimageloading:CachedImage Margin="8" HeightRequest="245" BackgroundColor="Transparent" Source="{Binding GalleryImage, Converter={StaticResource EmbeddedImageConverter}}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                                                        DownsampleToViewSize="True" Aspect="Fill"/>
+                            </AbsoluteLayout>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
